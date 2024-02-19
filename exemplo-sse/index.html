@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Define a codificação de caracteres para o documento -->
+    <meta charset="UTF-8">
+    <!-- Assegura a renderização adequada e o zoom touch em dispositivos móveis -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Título da página, que aparece na aba do navegador -->
+    <title>SSE Demo</title>
+    <!-- Estilos internos para a página -->
+    <style>
+        /* Estilos base para o corpo e o html */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif; /* Define a fonte padrão */
+            background-color: rgba(255, 255, 255, 0.2); /* Cor de fundo com transparência */
+            color: #fff; /* Cor do texto */
+        }
+
+        /* Estiliza o contêiner central */
+        .container {
+            margin: auto; /* Centraliza na página */
+            padding: 20px;
+            max-width: 600px; /* Largura máxima */
+        }
+
+        /* Estilos para o cabeçalho h1 */
+        h1 {
+            color: #ed145b; /* Cor do texto */
+            text-align: center; /* Alinhamento do texto */
+        }
+
+        /* Estilos para a div que contém as mensagens */
+        #messages {
+            margin-top: 20px;
+            padding: 10px;
+            background: #00a2ff; /* Cor de fundo */
+            border-radius: 5px; /* Bordas arredondadas */
+        }
+
+        /* Estilos para cada mensagem dentro da div #messages */
+        #messages div {
+            padding: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Cabeçalho principal -->
+        <h1>Server Sent Events (SSE) Demo</h1>
+        <!-- Div para exibir as mensagens recebidas via SSE -->
+        <div id="messages"></div>
+    </div>
+    <!-- Script para manipular eventos SSE -->
+    <script>
+        // Inicia uma nova conexão SSE com o servidor
+        const eventSource = new EventSource('http://localhost:8000/events');
+
+        // Define a função a ser chamada quando uma mensagem é recebida
+        eventSource.onmessage = function (event) {
+            // Cria um novo elemento div para cada mensagem
+            const message = document.createElement('div');
+            // Define o texto do elemento com a mensagem recebida
+            message.textContent = `Mensagem: ${event.data}`;
+            // Adiciona o novo elemento à div #messages
+            document.getElementById('messages').appendChild(message);
+        };
+    </script>
+</body>
+</html>
