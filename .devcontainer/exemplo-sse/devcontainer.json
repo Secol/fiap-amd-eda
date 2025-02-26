@@ -1,0 +1,8 @@
+{
+	"name": "SSE",
+	"image": "python:3.12",
+	"workspaceMount": "source=${localWorkspaceFolder}/exemplo-sse,target=/workspace,type=bind",
+	"workspaceFolder": "/workspace",
+	"postCreateCommand": "pip install --user -r requirements.txt",
+	"forwardPorts": [8000],
+}
